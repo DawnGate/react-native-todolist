@@ -6,6 +6,7 @@ type ContextValues = {
   todoItems?: ImplTodoItem[];
   setTodoItems?: React.Dispatch<React.SetStateAction<ImplTodoItem[]>>;
   loading?: boolean;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const StoreContext = createContext<ContextValues>({});
@@ -44,6 +45,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         todoItems,
         setTodoItems,
         loading,
+        setLoading
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { ImplTodoItem } from "@/types";
 import { deleteDataLocalByKey, storeDataLocal } from "@/utils/syncLocalData";
 
 export const useStoreContext = () => {
-  const { todoItems, setTodoItems } = useContext(StoreContext);
+  const { todoItems, setTodoItems, setLoading } = useContext(StoreContext);
 
   const addTodo = (title: string) => {
     if (!todoItems || !setTodoItems) return;
@@ -80,10 +80,27 @@ export const useStoreContext = () => {
     );
   };
 
+  const deletedAllDoneTodo = async () => {
+    if (!todoItems || !setTodoItems || !setLoading) return;
+
+    const completedTodoItems = todoItems.filter((item) => item.completedDate);
+
+    if (!completedTodoItems.length) return;
+
+    setLoading(true);
+    await Promise.all(
+      completedTodoItems.map((item) => deleteDataLocalByKey(`todo-${item.id}`))
+    );
+    setLoading(false);
+
+    setTodoItems((prev) => prev.filter((item) => !item.completedDate));
+  };
+
   return {
     addTodo,
     deleteTodo,
     doneTodo,
     restoreTodo,
+    deletedAllDoneTodo,
   };
 };
