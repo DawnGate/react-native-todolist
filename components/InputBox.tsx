@@ -1,23 +1,19 @@
+import { useStoreContext } from "@/hooks/useStoreContext";
 import { useState } from "react";
-import {
-  Keyboard,
-  NativeSyntheticEvent,
-  StyleSheet,
-  TextInput,
-  TextInputChangeEventData,
-  TextInputKeyPressEventData,
-  View,
-} from "react-native";
+import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 
 export const InputBox = () => {
   const [inputValue, setInputValue] = useState("");
 
+  const { addTodo } = useStoreContext();
+
   const onSubmitEditing = () => {
     Keyboard.dismiss();
+    if (inputValue.trim()) {
+      addTodo(inputValue.trim());
+    }
     setInputValue("");
   };
-
-  console.log(inputValue);
 
   const onChangeText = (text: string) => {
     setInputValue(text);

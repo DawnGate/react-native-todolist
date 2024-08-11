@@ -1,19 +1,19 @@
 import { Header } from "@/components/Header";
 import { InputBox } from "@/components/InputBox";
-import { TodoItem } from "@/components/Todo/Item";
 import { Title } from "@/components/Todo/Title";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView, View } from "react-native";
+import { CurrentTodo } from "./components/CurrentTodo";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Header />
       <InputBox />
       <View style={styles.todoContainer}>
-        <Title label="Next todo" />
-        <TodoItem />
+        <Title label="Current todo" />
+        <CurrentTodo />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
