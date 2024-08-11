@@ -34,6 +34,7 @@ export const CurrentTodo = () => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 20,
+    lineHeight: 24,
     fontWeight: "500",
     paddingVertical: 10,
   },
