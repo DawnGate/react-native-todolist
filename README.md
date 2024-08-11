@@ -29,3 +29,8 @@ This command will move the starter code to the **app-example** directory and cre
 # State Management
 
 React context + async storage
+
+# Build
+
+1. local build -> eas build --platform android --profile preview --local
+2. server build -> apk file setting -> eas build -p android --profile preview (from eas.json)
