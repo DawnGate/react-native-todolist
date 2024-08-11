@@ -2,16 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
 
-type Props = {
-  title: string;
-};
 export const Header = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Simple Todo List</Text>
       <View style={styles.navContainer}>
         <Text>Done</Text>
-        <Link href="/done" style={{ backgroundColor: "red" }}>
+        <Link href="/done">
           <Ionicons name="chevron-forward" size={24} />
         </Link>
       </View>

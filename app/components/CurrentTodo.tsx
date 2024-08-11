@@ -1,7 +1,7 @@
-import { TodoItem } from "@/components/Todo/Item";
 import { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { StoreContext } from "../storeContext";
+import { TodoItem } from "@/components/Todo/Item";
 
 export const CurrentTodo = () => {
   const { todoItems } = useContext(StoreContext);
@@ -23,11 +23,11 @@ export const CurrentTodo = () => {
   }
 
   return (
-    <View>
-      {renderTodoItems.map((item) => (
-        <TodoItem key={item.id} data={item} />
-      ))}
-    </View>
+    <FlatList
+      data={renderTodoItems}
+      renderItem={({ item }) => <TodoItem data={item} />}
+      keyExtractor={(item) => item.id}
+    />
   );
 };
 

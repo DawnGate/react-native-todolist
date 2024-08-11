@@ -2,6 +2,7 @@ import { useContext } from "react";
 import * as Crypto from "expo-crypto";
 import { StoreContext } from "@/app/storeContext";
 import { ImplTodoItem } from "@/types";
+import { deleteDataLocalByKey, storeDataLocal } from "@/utils/syncLocalData";
 
 export const useStoreContext = () => {
   const { todoItems, setTodoItems } = useContext(StoreContext);
@@ -16,6 +17,8 @@ export const useStoreContext = () => {
       createdDate: new Date(),
     };
 
+    storeDataLocal(newItem, `todo-${newItem.id}`);
+
     setTodoItems((prev) => [newItem, ...prev]);
   };
 
@@ -25,6 +28,8 @@ export const useStoreContext = () => {
     const foundTodoItem = todoItems.find((item) => item.id === id);
 
     if (!foundTodoItem) return;
+
+    deleteDataLocalByKey(`todo-${foundTodoItem.id}`);
 
     setTodoItems((prev) => prev.filter((item) => item.id !== foundTodoItem.id));
   };
@@ -41,6 +46,8 @@ export const useStoreContext = () => {
       completedDate: new Date(),
       updatedDate: new Date(),
     };
+
+    storeDataLocal(updateTodoItem, `todo-${updateTodoItem.id}`);
 
     setTodoItems((prev) =>
       prev.map((item) => {
@@ -62,6 +69,8 @@ export const useStoreContext = () => {
       updatedDate: new Date(),
       completedDate: undefined,
     };
+
+    storeDataLocal(updateTodoItem, `todo-${updateTodoItem.id}`);
 
     setTodoItems((prev) =>
       prev.map((item) => {

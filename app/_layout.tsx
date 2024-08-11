@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
 import { StoreProvider } from "./storeContext";
+import { AppLoading } from "@/components/AppLoading";
 
 export default function RootLayout() {
   return (
@@ -23,6 +24,7 @@ export default function RootLayout() {
         />
       </Stack>
       {/* <Snackbar /> */}
+      <AppLoading />
     </StoreProvider>
   );
 }
