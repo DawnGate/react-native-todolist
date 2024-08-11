@@ -134,6 +134,11 @@ export const useActions = () => {
     );
     setLoading(false);
 
+    setSnackbarData?.({
+      title: "All completed todo cleared",
+      id: "clear",
+    });
+
     setTodoItems((prev) => prev.filter((item) => !item.completedDate));
   };
 

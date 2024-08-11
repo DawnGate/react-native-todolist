@@ -29,6 +29,7 @@ export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
       setCurrentData(null);
     } else {
       setCurrentData(data);
+      setNewData(null);
     }
   };
 
