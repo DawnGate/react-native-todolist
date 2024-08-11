@@ -3,13 +3,13 @@ import { CheckBox } from "../CheckBox";
 import { IconButton } from "../IconButton";
 import { Ionicons } from "@expo/vector-icons";
 import { ImplTodoItem } from "@/types";
-import { useStoreContext } from "@/hooks/useStoreContext";
+import { useActions } from "@/hooks/useActions";
 
 type Props = {
   data: ImplTodoItem;
 };
 export const TodoItem = ({ data }: Props) => {
-  const { doneTodo, deleteTodo, restoreTodo } = useStoreContext();
+  const { doneTodo, deleteTodo, restoreTodo } = useActions();
 
   const isDone = !!data.completedDate;
 

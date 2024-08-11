@@ -2,12 +2,12 @@ import { Title } from "@/components/Todo/Title";
 import { useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { StoreContext } from "../storeContext";
-import { useStoreContext } from "@/hooks/useStoreContext";
+import { useActions } from "@/hooks/useActions";
 
 export const DoneHeader = () => {
   const { todoItems } = useContext(StoreContext);
 
-  const { deletedAllDoneTodo } = useStoreContext();
+  const { deletedAllDoneTodo } = useActions();
 
   const completedCount =
     todoItems?.filter((item) => item.completedDate).length ?? 0;

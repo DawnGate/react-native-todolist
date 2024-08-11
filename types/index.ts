@@ -6,3 +6,9 @@ export type ImplTodoItem = {
   completedDate?: Date;
   // deletedDate?: Date;
 };
+
+export type ImplSnackItem = {
+  title: string;
+  id: string;
+  action?: () => void;
+};

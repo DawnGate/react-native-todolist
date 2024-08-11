@@ -1,11 +1,11 @@
-import { useStoreContext } from "@/hooks/useStoreContext";
+import { useActions } from "@/hooks/useActions";
 import { useState } from "react";
 import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 
 export const InputBox = () => {
   const [inputValue, setInputValue] = useState("");
 
-  const { addTodo } = useStoreContext();
+  const { addTodo } = useActions();
 
   const onSubmitEditing = () => {
     Keyboard.dismiss();

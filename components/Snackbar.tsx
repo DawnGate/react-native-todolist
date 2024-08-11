@@ -1,13 +1,19 @@
+import { ImplSnackItem } from "@/types";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-export const Snackbar = () => {
+type Props = {
+  data: ImplSnackItem;
+};
+export const Snackbar = ({ data }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.boxContainer}>
-        <Text style={styles.text}>New todo added!!</Text>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.buttonText}>Undo</Text>
-        </TouchableOpacity>
+        <Text style={styles.text}>{data.title}!!</Text>
+        {data.action && (
+          <TouchableOpacity onPress={data.action}>
+            <Text style={styles.buttonText}>Undo</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

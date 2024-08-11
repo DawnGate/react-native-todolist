@@ -3,9 +3,13 @@ import * as Crypto from "expo-crypto";
 import { StoreContext } from "@/app/storeContext";
 import { ImplTodoItem } from "@/types";
 import { deleteDataLocalByKey, storeDataLocal } from "@/utils/syncLocalData";
+import { SnackbarContext } from "@/app/snackbarContext";
 
-export const useStoreContext = () => {
+export const useActions = () => {
   const { todoItems, setTodoItems, setLoading } = useContext(StoreContext);
+
+  const { setData: setSnackbarData, clearData: clearSnackbarData } =
+    useContext(SnackbarContext);
 
   const addTodo = (title: string) => {
     if (!todoItems || !setTodoItems) return;
@@ -18,6 +22,10 @@ export const useStoreContext = () => {
     };
 
     storeDataLocal(newItem, `todo-${newItem.id}`);
+    setSnackbarData?.({
+      title: "New todo added",
+      id: newId,
+    });
 
     setTodoItems((prev) => [newItem, ...prev]);
   };
@@ -30,6 +38,17 @@ export const useStoreContext = () => {
     if (!foundTodoItem) return;
 
     deleteDataLocalByKey(`todo-${foundTodoItem.id}`);
+
+    setSnackbarData?.({
+      title: "Todo deleted",
+      id: foundTodoItem.id,
+      action: () => {
+        storeDataLocal(foundTodoItem, `todo-${foundTodoItem.id}`);
+        const currentItems = todoItems;
+        setTodoItems(currentItems);
+        clearSnackbarData?.();
+      },
+    });
 
     setTodoItems((prev) => prev.filter((item) => item.id !== foundTodoItem.id));
   };
@@ -48,6 +67,17 @@ export const useStoreContext = () => {
     };
 
     storeDataLocal(updateTodoItem, `todo-${updateTodoItem.id}`);
+
+    setSnackbarData?.({
+      title: "Todo completed",
+      id: foundTodoItem.id,
+      action: () => {
+        storeDataLocal(foundTodoItem, `todo-${foundTodoItem.id}`);
+        const currentItems = todoItems;
+        setTodoItems(currentItems);
+        clearSnackbarData?.();
+      },
+    });
 
     setTodoItems((prev) =>
       prev.map((item) => {
@@ -71,6 +101,17 @@ export const useStoreContext = () => {
     };
 
     storeDataLocal(updateTodoItem, `todo-${updateTodoItem.id}`);
+
+    setSnackbarData?.({
+      title: "Todo restored",
+      id: foundTodoItem.id,
+      action: () => {
+        storeDataLocal(foundTodoItem, `todo-${foundTodoItem.id}`);
+        const currentItems = todoItems;
+        setTodoItems(currentItems);
+        clearSnackbarData?.();
+      },
+    });
 
     setTodoItems((prev) =>
       prev.map((item) => {
