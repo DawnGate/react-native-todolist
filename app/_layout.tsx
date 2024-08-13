@@ -3,6 +3,7 @@ import { router, Stack } from "expo-router";
 import { StoreProvider } from "./storeContext";
 import { AppLoading } from "@/components/AppLoading";
 import { SnackbarProvider } from "./snackbarContext";
+import { View } from "react-native";
 
 export default function RootLayout() {
   return (
@@ -13,15 +14,7 @@ export default function RootLayout() {
           <Stack.Screen
             name="done"
             options={{
-              title: "Done task",
-              headerLeft: () => (
-                <Ionicons
-                  name="chevron-back"
-                  size={24}
-                  color="black"
-                  onPress={() => router.back()}
-                />
-              ),
+              headerShown: false,
             }}
           />
         </Stack>

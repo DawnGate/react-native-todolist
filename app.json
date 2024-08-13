@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Simple TodoList",
+    "name": "Minimal Todo",
     "slug": "react-native-todolist",
     "version": "1.0.0",
     "orientation": "portrait",

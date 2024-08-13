@@ -1,37 +1,57 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { ReactNode } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const Header = () => {
+type Props = {
+  title: string;
+  showBack?: boolean;
+  next?: ReactNode;
+};
+export const Header = ({ title, showBack = false, next }: Props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Simple Todo List</Text>
-      <View style={styles.navContainer}>
-        <Text>Done</Text>
-        <Link href="/done">
-          <Ionicons name="chevron-forward" size={24} />
-        </Link>
-      </View>
+      {showBack && (
+        <View>
+          <Link href="/" style={styles.backLink}>
+            <Ionicons name="chevron-back" size={24} />
+          </Link>
+        </View>
+      )}
+      <Text
+        style={[
+          styles.text,
+          !showBack && {
+            marginLeft: 20,
+          },
+        ]}
+      >
+        {title}
+      </Text>
+      <View style={styles.navContainer}>{next}</View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 28,
-    lineHeight: 32,
+    fontSize: 24,
+    lineHeight: 28,
+    fontWeight: "500",
   },
   navContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
+    marginLeft: "auto",
+  },
+  backLink: {
+    padding: 4,
   },
   container: {
-    paddingTop: 20,
+    paddingTop: 50,
+    paddingBottom: 20,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
+    backgroundColor: "white",
   },
 });
